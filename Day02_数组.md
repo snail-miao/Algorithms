@@ -11,7 +11,7 @@
 2. 可以利用归并排序的思路，先将数组分成两个 有序的子数组，然后再排序，组成一个新数组。
 
 Code:
-```
+``` go
 func sortedSquares(nums []int) []int {
 	inArray, deArray := splitArray(nums)
 	iLen := len(inArray)
@@ -74,7 +74,7 @@ _给定一个含有 n 个正整数的数组和一个正整数 target 。
 2. 采用双指针法，来滑动子数组区间，判断区间和是否大于等于target，并记录最小区间和
 3. 采用前缀和数组来快速计算每个连续区间的和。
 
-```
+``` go
 func minSubArrayLen(target int, nums []int) int {
 // 构建前缀和数组
 sumArray:= []int{}
@@ -113,7 +113,7 @@ _给你一个正整数 n ，生成一个包含 1 到 n2 所有元素，且元素
 **思路：**
 1. 通过例子找规律，顺着旋转方向每一行每一列的公式写出来。
 
-```
+``` go
 func generateMatrix(n int) [][]int {
     row_start := 0
     row_end:= n-1
