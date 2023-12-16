@@ -1,7 +1,7 @@
 
 #  代码随想录算法训练营
 
-## Day 2 ｜977. 有序数组的平方
+## Day 2 ｜977. 有序数组的平方，209.长度最小的子数组
 
 ### 977. 有序数组的平方
 *给你一个按 非递减顺序 排序的整数数组 nums，返回 每个数字的平方 组成的新数组，要求也按 非递减顺序 排序。*
@@ -65,4 +65,43 @@ func splitArray(nums []int) ([]int, []int) {
 	return nil, nil
 }
 ```
+### 209. 长度最小的子数组
+_给定一个含有 n 个正整数的数组和一个正整数 target 。
+找出该数组中满足其总和大于等于 target 的长度最小的 连续子数组 [numsl, numsl+1, ..., numsr-1, numsr] ，并返回其长度。如果不存在符合条件的子数组，返回 0 。_
 
+**思路：**
+1. _正整数的数组_ -> 由i，j组成的子数组，j增大，和增大；i增大，和减小
+2. 采用双指针法，来滑动子数组区间，判断区间和是否大于等于target，并记录最小区间和
+3. 采用前缀和数组来快速计算每个连续区间的和。
+
+```
+func minSubArrayLen(target int, nums []int) int {
+// 构建前缀和数组
+sumArray:= []int{}
+    sum := 0
+    sumArray = append(sumArray,0)
+    for _,num := range nums{
+        sum += num
+        sumArray =append(sumArray, sum)
+    }
+
+// 滑动子数组区间
+    i,j := 0,0
+    minLen := math.MaxInt
+    for j< len(sumArray){
+        if sumArray[j]-sumArray[i] >= target {
+            if j-i < minLen{
+                minLen = j-i
+            }
+            i++
+        }else{
+            j++
+        }
+    }
+
+    if minLen == math.MaxInt{
+        return 0
+    }
+    return minLen
+}
+```
